@@ -5,10 +5,11 @@ on:
     branches:
       - main
 
+permissions: read-all 
 
 jobs:
   release:
-    permissions: read-all 
+    permissions: 
       packages: write
     runs-on: ubuntu-latest
     steps:
