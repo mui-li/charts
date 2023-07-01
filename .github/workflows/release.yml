@@ -1,9 +1,11 @@
 name: Release Charts
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Lint and Test Charts"]
+    branches: [main]
+    types: 
+      - completed
 
 permissions: read-all 
 
@@ -12,6 +14,7 @@ jobs:
     permissions: 
       packages: write
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
